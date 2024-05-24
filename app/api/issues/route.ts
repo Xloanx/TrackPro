@@ -25,3 +25,18 @@ export async function POST(request: NextRequest){
 
     return NextResponse.json(newIssue, { status:201 })
 }
+
+
+//create GET request function
+export async function GET(request: NextRequest, response: NextResponse){
+
+    const data = await prisma.issue.findMany()
+
+    //if no data in db
+    if (!data)
+        return NextResponse.json({message: "No data in database"}, {status: 404})
+
+
+    //if data exist
+    return NextResponse.json(data, { status:201 })
+    }
