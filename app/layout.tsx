@@ -1,5 +1,4 @@
 import '@radix-ui/themes/styles.css';
-import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";

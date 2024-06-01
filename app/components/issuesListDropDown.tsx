@@ -25,10 +25,10 @@ const IssuesListDropDown = ({selectedStatus, handleStatusSelection}) => {
       className="select select-bordered select-sm w-full max-w-32" 
       value={selectedStatus} 
       onChange={handleStatusSelection}>
-    <option value="" selected>All</option>
-    <option value="open"><Badge color="orange">OPEN</Badge></option>
-    <option value="in progress"><Badge color="blue">IN PROGRESS</Badge></option>
-    <option value="closed"><Badge color="green">CLOSED</Badge></option>
+    <option value="" defaultValue>All</option>
+    <option value="open">OPEN</option>
+    <option value="in progress">IN PROGRESS</option>
+    <option value="closed">CLOSED</option>
   </select>
   )
 }
