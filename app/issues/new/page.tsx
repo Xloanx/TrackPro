@@ -7,6 +7,7 @@ import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -25,11 +26,12 @@ const { register, control, handleSubmit } = useForm<NewIssueForm>();
 
   return (
     <>
-    <div>
-        New Issue Page
-    </div>
+    <h2 className="font-mono text-2xl font-bold py-10">
+        Create New Issue
+    </h2>
       <form onSubmit={handleSubmit(async (data)=>{
                                                   await axios.post('/api/issues', data)   //post to api
+                                                  toast("Wow so easy!");
                                                   router.push('/issues')                  // redirect to issues page
                                                   })}>
         <Flex direction="column" gap="2">
@@ -42,7 +44,7 @@ const { register, control, handleSubmit } = useForm<NewIssueForm>();
               render = {({ field }) => <SimpleMDE placeholder="Description of Issue…" {...field}/>}
               />
               
-              <Button size='2'>Submit Issue</Button>
+              <Button radius="small" size='2'>Submit Issue</Button>
           </Box>
         </Flex>
       </form>

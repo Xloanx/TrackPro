@@ -3,11 +3,11 @@ import { Tooltip, IconButton } from "@radix-ui/themes"
 import { MdDelete } from "react-icons/md";
 
 
-const DeleteButton = () => {
+const DeleteButton = ({handleDelete}) => {
   return (
     <Tooltip content="Delete">
         <IconButton radius="full" color="red"  >
-        <MdDelete />
+        <MdDelete onClick={handleDelete}/>
         </IconButton>
     </Tooltip>
   )

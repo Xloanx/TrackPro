@@ -1,7 +1,8 @@
 import '@radix-ui/themes/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
+import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Navbar from "./navbar";
 import { Theme, ThemePanel } from '@radix-ui/themes';
 import Footer from './footer';
