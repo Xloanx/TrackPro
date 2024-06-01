@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./navbar";
 import { Theme, ThemePanel } from '@radix-ui/themes';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './footer';
 
 const inter = Inter({ subsets: ["latin"] });

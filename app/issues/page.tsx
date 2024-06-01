@@ -79,9 +79,11 @@ const IssuesPage = () => {
       </div>
     </div>
 
-    < IssuesTable 
+    { issues?
+      < IssuesTable 
         data={issues}
-        handleDelete = {handleIssueDelete}/>
+        handleDelete = {handleIssueDelete}/>:
+        "No issues data on the the databse"}
 
     <Flex justify="end">
       <Pagination />
