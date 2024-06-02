@@ -26,9 +26,25 @@ const { register, control, handleSubmit, formState:{errors} } = useForm<NewIssue
 const [error, setError] = useState("")
 const [isSubmitting, setSubmitting] = useState(false)
 
+const onSubmit = handleSubmit(async (data) => {
+    try {
+      setSubmitting(true)
+      const res = await axios.post('/api/issues', data)   //post to api
+      
+      router.push('/issues')                  // redirect to issues page
+      res.status === 201 ? 
+      toast.success("Issue submitted successfully",{autoClose:8000}) :  
+      toast.error("Something went wrong",{autoClose:8000})  //toast message
+    } 
+    catch (error) {
+      setSubmitting(false)
+      setError("An unexpected Error Occured")
+    }
+    })
+
   return (
     <>
-    <h2 className="font-mono text-2xl font-bold py-10">
+    <h2 className="font-mono text-2xl font-bold py-8">
         Create New Issue
     </h2>
 
@@ -44,21 +60,7 @@ const [isSubmitting, setSubmitting] = useState(false)
       
       <form 
           className='space-y-3'
-          onSubmit={handleSubmit(async (data) => {
-                                                  try {
-                                                    setSubmitting(true)
-                                                    const res = await axios.post('/api/issues', data)   //post to api
-                                                    
-                                                    router.push('/issues')                  // redirect to issues page
-                                                    res.status === 201 ? 
-                                                    toast.success("Issue submitted successfully",{autoClose:false}) :  
-                                                    toast.error("Something went wrong",{autoClose:8000})  //toast message
-                                                  } 
-                                                  catch (error) {
-                                                    setSubmittting(false)
-                                                    setError("An unexpected Error Occured")
-                                                  }
-                                                  })}>
+          onSubmit={onSubmit}>
         <Flex direction="column" gap="2">
               <TextField.Root placeholder="Title" { ...register('title', { minLength:1 } )} />
               <ErrorMessage> {errors.title?.message} </ErrorMessage>
