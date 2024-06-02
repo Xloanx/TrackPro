@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from 'react';
-import { Flex, Button, TextField, Callout } from '@radix-ui/themes';
+import { Flex, Button, TextField, Callout, Spinner } from '@radix-ui/themes';
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from 'react-hook-form';
@@ -24,7 +24,7 @@ const { register, control, handleSubmit, formState:{errors} } = useForm<NewIssue
   resolver: zodResolver(createIssueSchema)
 });
 const [error, setError] = useState("")
-
+const [isSubmitting, setSubmitting] = useState(false)
 
   return (
     <>
@@ -46,6 +46,7 @@ const [error, setError] = useState("")
           className='space-y-3'
           onSubmit={handleSubmit(async (data) => {
                                                   try {
+                                                    setSubmitting(true)
                                                     const res = await axios.post('/api/issues', data)   //post to api
                                                     
                                                     router.push('/issues')                  // redirect to issues page
@@ -54,6 +55,7 @@ const [error, setError] = useState("")
                                                     toast.error("Something went wrong",{autoClose:8000})  //toast message
                                                   } 
                                                   catch (error) {
+                                                    setSubmittting(false)
                                                     setError("An unexpected Error Occured")
                                                   }
                                                   })}>
@@ -67,9 +69,16 @@ const [error, setError] = useState("")
               render = {({ field }) => <SimpleMDE placeholder="Description of Issue…" {...field}/>}
               />
               <ErrorMessage> {errors.description?.message} </ErrorMessage>
-                            
-              <div className="max-w-40">
-              <Button radius="small" size='2' >Submit New Issue</Button>
+
+              <div className="max-w-48">
+              <Button radius="small" size='2' disabled={isSubmitting}>
+                Submit New Issue
+                {
+                  isSubmitting &&
+                <Spinner loading>
+                </Spinner>
+                }
+              </Button> 
               </div>
         </Flex>
       </form>
