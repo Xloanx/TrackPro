@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from 'react';
-import { Flex, Text, Button, TextField, Callout } from '@radix-ui/themes';
+import { Flex, Button, TextField, Callout } from '@radix-ui/themes';
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from 'react-hook-form';
@@ -9,8 +9,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createIssueSchema } from '@/app/validationSchemas';
 import {z} from 'zod';
+import { createIssueSchema } from '@/app/validationSchemas';
+import ErrorMessage from '@/app/components/errorMessage';
 
 //define the types 
 type IssueForm = z.infer<typeof createIssueSchema>;
@@ -58,15 +59,15 @@ const [error, setError] = useState("")
                                                   })}>
         <Flex direction="column" gap="2">
               <TextField.Root placeholder="Title" { ...register('title', { minLength:1 } )} />
-              {errors.title && <Text color='red' as="p"> { errors.title.message } </Text> }
+              <ErrorMessage> {errors.title?.message} </ErrorMessage>
               <Controller 
               name = "description"
               control = {control}
               // rules={{ required: true }}
               render = {({ field }) => <SimpleMDE placeholder="Description of Issue…" {...field}/>}
               />
-              {errors.description && <Text color='red' as="p"> { errors.description.message } </Text> }
-              
+              <ErrorMessage> {errors.description?.message} </ErrorMessage>
+                            
               <div className="max-w-40">
               <Button radius="small" size='2' >Submit New Issue</Button>
               </div>
