@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
-import { createIssueSchema } from "../../validationSchemas";
+import { createIssueSchema, fetchIssueSchema } from "../../validationSchemas";
 
 //create POST request function
 export async function POST(request: NextRequest){
@@ -19,17 +19,64 @@ export async function POST(request: NextRequest){
 }
 
 
-//create GET request function
+//create GET request function to fecth all data
 export async function GET(request: NextRequest, response: NextResponse){
 
-    const data = await prisma.issue.findMany()
-
-    //if no data in db
-    if (!data)
-        return NextResponse.json({message: "No data in database"}, {status: 404})
-    //if data exist
-    return NextResponse.json(data, { status:201 })
+    try {
+        const data = await prisma.issue.findMany();
+        //if no data in db
+        // if (!data || data.length === 0){
+        //     return NextResponse.json({message: "No data in database"}, {status: 404})
+        // }
+        //if data exist
+        return NextResponse.json(data, { status:201 })
+    } catch (error) {
+        return NextResponse.json({ message: "Server error" }, { status: 500 });
     }
+}
+
+// export async function GET(request, { params }) {
+//     const { id } = params;
+  
+//     try {
+//       const issue = await prisma.issue.findUnique({
+//         where: { id: parseInt(id, 10) },
+//       });
+  
+//       if (!issue) {
+//         return NextResponse.json({ message: "Incorrect Issue ID" }, { status: 404 });
+//       }
+  
+//       return NextResponse.json(issue, { status: 201 });
+//     } catch (error) {
+//       console.error(error);
+//       return NextResponse.json({ message: "Server error" }, { status: 500 });
+//     }
+//   }
+
+
+//create GET request function to fetch a single data
+// export async function GETONE(request: NextRequest, response: NextResponse){
+
+//     const body = await request.json();
+//     const validation = fetchIssueSchema.safeParse(body);
+
+//     //check for validation success
+//     if(!validation.success)
+//         return NextResponse.json(validation.error.errors, {status: 400});
+
+//     const issue = await prisma.issue.findUnique({
+//         where: {
+//             id: body.id,
+//         },
+//       })
+
+//     //if issue does not exist on db
+//     if (!issue)
+//         return NextResponse.json({message: "Incorrect Issue ID"}, {status: 404})
+//     //if data exist
+//     return NextResponse.json(issue, { status:201 })
+//     }
 
 
 // //create DELETE request function

@@ -10,17 +10,29 @@ import NewIssueButton from '../components/newIssueButton';
 import Pagination from '../components/pagination';
 import LoadingRings from '../components/loadingRings';
 
+
+interface Issue {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+
 const IssuesPage = () => {
   const [issues, setIssues] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [selectedStatus, setSelectedStatus] = useState("")
 
+  // const response = await fetch('/api/issues');
+  // const issues = await response.json();
+
   useEffect(()=>{
     async function fetchIssues(){
       try {
-        //const data = await fetch('/api/issues');
         const response = await axios.get('/api/issues')
-        //const issues = await data.json();
         setIssues(response.data);
         setIsLoading(false);
         if (!issues) {
@@ -29,9 +41,6 @@ const IssuesPage = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-      
-      
-
     }
     fetchIssues()
   }, [])
@@ -53,41 +62,34 @@ const IssuesPage = () => {
   setIssues(newIssues);
  }
 
-  interface Issue {
-    id: number;
-    title: string;
-    description: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-  }
+
 
   return (
     <>
     <h2 className="font-mono text-2xl font-bold ">
       Issues Listing</h2>
-
+      
     <div className="flex justify-between items-center p-4">
       <div className="text-left">
         <IssuesListDropDown 
             selectedStatus= {selectedStatus}
             handleStatusSelection = {handleStatusSelection}/>
+        {/* <IssuesListDropDown /> */}
       
       </div>
       <div className="text-right">
         <NewIssueButton />
       </div>
     </div>
-
-    { issues?
+    
+    { issues.length === 0?
+    "No issues data on the database":
       < IssuesTable 
         data={issues}
-        handleDelete = {handleIssueDelete}/>:
-        "No issues data on the the databse"}
-
-    <Flex justify="end">
-      <Pagination />
-    </Flex>
+        handleDelete = {handleIssueDelete}/>
+    }
+   
+    
     </>
   )
 }
