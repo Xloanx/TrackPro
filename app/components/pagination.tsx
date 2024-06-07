@@ -1,16 +1,43 @@
 import React from 'react'
 
-const Pagination = () => {
+const Pagination = ({data, selectedRecordSize, selectedPage, handlePageChange, incrementPage, decrementPage}) => {
+
+//handling pagination logic
+const dataCount = data.length;
+const numOfPages = Math.ceil(dataCount/parseInt(selectedRecordSize))
+const pages = _.range(1,numOfPages+1)
+
+
+
+
   return (
+    <>
+    { pages.length === 1? "" :  //if selected record size results in just a page, don't display pagination
     <div className="join py-5">
-        <button className="join-item btn btn-sm">«</button>
-        <button className="join-item btn btn-sm" > 1</button>
-        <button className="join-item btn btn-sm btn-active"> 2</button>
-        <button className="join-item btn btn-sm"  >3</button>
-        <button className="join-item btn btn-sm"  >4</button>
-        <button className="join-item btn btn-sm"  >5</button>
-        <button className="join-item btn btn-sm">»</button>
+        <button 
+            className={selectedPage===1?
+              "join-item btn btn-sm btn-disabled" :
+              "join-item btn btn-sm"}
+            onClick={decrementPage}>«
+        </button>
+
+        {pages.map(page=>(
+          <button 
+            key={page} 
+            className={selectedPage===page?"join-item btn btn-sm btn-active" :"join-item btn btn-sm"}
+            onClick={()=>handlePageChange(page)}> {page}</button>
+        ))}
+         
+
+        <button 
+            className={selectedPage=== pages[pages.length - 1]?
+              "join-item btn btn-sm btn-disabled" :
+              "join-item btn btn-sm"}
+            onClick={incrementPage}>»
+        </button>
     </div>
+      }
+      </>
   )
 }
 

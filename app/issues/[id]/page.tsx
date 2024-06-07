@@ -5,6 +5,9 @@ import axios from 'axios';
 import { Text, Flex, Box, Badge, Select } from '@radix-ui/themes';
 import EditButton from '@/app/components/editButton';
 import DeleteButton from '@/app/components/deleteButton';
+import NextPageButton from '@/app/components/nextPageButton';
+import Link from 'next/link';
+
 
 interface Issue {
   title: string;
@@ -15,7 +18,9 @@ interface Issue {
 }
 
 const IssueDetails = async ({params}) => {
+  // const [id, setId] = useState(params.id)
   const {id} = params;
+  //const nextId = parseInt(id)+1
 
 
   const issue = await prisma.issue.findUnique({
@@ -23,37 +28,25 @@ const IssueDetails = async ({params}) => {
   });
 
 
+const handleNextId = () =>{
 
-
-
-
-    // const [issue, setIssue] = useState({})
-    // const [isLoading, setIsLoading] = useState(true)
-
-    // useEffect(()=>{
-    //     async function fetchIssue(){
-    //       try {
-    //         const response = await axios.get(`/api/issues/${params.id}`)
-    //         setIssue(response.data);
-    //         setIsLoading(false);
-    //         if (!issue) {
-    //           throw new Error('Failed to fetch issue details');
-    //         }
-    //       } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //       }
-    //     }
-    //     fetchIssue()
-    //   }, [])
- 
-    
-    // console.log(issue)
+}
 
   return (
     <>
-        <h2 className="font-mono text-2xl font-bold py-10">
-        Issue Details - Issue {id}
+    <div className="flex justify-between items-center p-4">
+      <div className="text-left">
+      <h2 className="font-mono text-2xl font-bold py-10">
+        Issue Details - Issue {id} 
         </h2>
+      </div>
+      <div className="text-right">
+        {/* <Link href={`/issues/${nextId}`}>
+          <NextPageButton handleNextId={handleNextId}/> 
+        </Link> */}
+      </div>
+    </div>
+        
         
 
       {!issue ?

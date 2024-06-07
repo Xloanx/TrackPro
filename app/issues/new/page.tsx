@@ -33,8 +33,8 @@ const onSubmit = handleSubmit(async (data) => {
       
       router.push('/issues')                  // redirect to issues page
       res.status === 201 ? 
-      toast.success("Issue submitted successfully",{autoClose:8000}) :  
-      toast.error("Something went wrong",{autoClose:8000})  //toast message
+      toast.success("Issue submitted successfully",{autoClose:12000}) :  
+      toast.error("Something went wrong",{autoClose:12000})  //toast message
     } 
     catch (error) {
       setSubmitting(false)

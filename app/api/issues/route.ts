@@ -23,7 +23,7 @@ export async function POST(request: NextRequest){
 export async function GET(request: NextRequest, response: NextResponse){
 
     try {
-        const data = await prisma.issue.findMany();
+        const data = await prisma.issue.findMany({where: { id: parseInt(id, 10) },});
         //if no data in db
         // if (!data || data.length === 0){
         //     return NextResponse.json({message: "No data in database"}, {status: 404})
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest, response: NextResponse){
         //if data exist
         return NextResponse.json(data, { status:201 })
     } catch (error) {
-        return NextResponse.json({ message: "Server error" }, { status: 500 });
+        return NextResponse.json({ message: "Server error", error }, { status: 500 });
     }
 }
 

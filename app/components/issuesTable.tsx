@@ -1,9 +1,10 @@
 import React from 'react'
-import { Table, Badge, Text, Strong, Flex } from '@radix-ui/themes'
-import EditButton from './editButton';
-import DeleteButton from './deleteButton';
+import { Table, Badge, Text, Strong, Flex, Select } from '@radix-ui/themes'
 import Link from 'next/link';
+import _ from 'lodash';
 import Pagination from './pagination';
+import RecordSizeSelect from './recordSizeSelect';
+import { Paginate } from '../utils/paginate';
 
 interface Data {
   id: number,
@@ -13,25 +14,49 @@ interface Data {
   updatedAt: Date,
 }
 
-const IssuesTable = ({data, handleDelete}) => {
+const IssuesTable = ({data, handleDelete, selectedRecordSize, handleRecordSizeChange, 
+                      selectedPage, handlePageChange, incrementPage, decrementPage }) => {
+  
+  console.log(data.message)
+
+  if (data.length>0){
+    const reversedDataArray = data.slice().reverse();  //to be mapped to achieve LIFO
+    const paginatedData = Paginate(reversedDataArray, selectedPage, selectedRecordSize)
+    return [reversedDataArray, paginatedData]
+  }
+  
+
+  
+
+
   return (
     <>
-    <Text as="p">Showing <Strong>{data.length}</Strong> items on the database.</Text>
-    <Table.Root>
+    <div className="flex justify-between items-center p-4">
+      <div className="text-left">
+        <Text as="p">Showing <Strong>{data.length}</Strong> items on the database.</Text>
+      </div>
+      <div className="text-right">
+        <RecordSizeSelect 
+              selectedRecordSize={selectedRecordSize}
+              handleRecordSizeChange ={handleRecordSizeChange}/>  
+      </div>
+    </div>
+    
+
+<Table.Root>
   <Table.Header>
     <Table.Row>
-    <Table.ColumnHeaderCell><Text size="3">S/N</Text></Table.ColumnHeaderCell>
+      <Table.ColumnHeaderCell><Text size="3">S/N</Text></Table.ColumnHeaderCell>
       <Table.ColumnHeaderCell><Text size="3">Issue</Text></Table.ColumnHeaderCell>
       <Table.ColumnHeaderCell><Text size="3">Status</Text></Table.ColumnHeaderCell>
       <Table.ColumnHeaderCell><Text size="3">Created</Text></Table.ColumnHeaderCell>
-      {/* <Table.ColumnHeaderCell></Table.ColumnHeaderCell> */}
     </Table.Row>
   </Table.Header>
 
   <Table.Body>
-    {data.map(d =>(
+    {paginatedData.map(d =>(
           <Table.Row key={d.id}>
-            <Table.Cell className="font-sans text-base">{data.indexOf(d)+1}</Table.Cell>
+            <Table.Cell className="font-sans text-base">{reversedDataArray.indexOf(d)+1}</Table.Cell>
             <Table.Cell className="font-sans text-base">
               <Link href={`/issues/${d.id}`}>
                 {d.title}
@@ -47,16 +72,10 @@ const IssuesTable = ({data, handleDelete}) => {
               </Badge>
             </Table.Cell>
             <Table.Cell className="font-sans text-base">{new Date(d.createdAt).toDateString()}</Table.Cell>
-            {/* <Table.Cell> <DeleteButton handleDelete={()=>handleDelete(d.id)}/> </Table.Cell> */}
           </Table.Row>
     ))}
   </Table.Body>
 </Table.Root>
-
-
-<Flex justify="end">
-  <Pagination />
-</Flex>
     </>
   )
 }
