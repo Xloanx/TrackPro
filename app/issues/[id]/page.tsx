@@ -7,6 +7,7 @@ import EditButton from '@/app/components/editButton';
 import DeleteButton from '@/app/components/deleteButton';
 import NextPageButton from '@/app/components/nextPageButton';
 import Link from 'next/link';
+//import { useRouter } from 'next/navigation';
 
 
 interface Issue {
@@ -18,9 +19,8 @@ interface Issue {
 }
 
 const IssueDetails = async ({params}) => {
-  // const [id, setId] = useState(params.id)
   const {id} = params;
-  //const nextId = parseInt(id)+1
+
 
 
   const issue = await prisma.issue.findUnique({
@@ -28,9 +28,6 @@ const IssueDetails = async ({params}) => {
   });
 
 
-const handleNextId = () =>{
-
-}
 
   return (
     <>
@@ -88,10 +85,10 @@ const handleNextId = () =>{
                 </Select.Root>
               </div>
               <div className='w-full max-w-40'>
-                  <EditButton />
+                  <EditButton issueId={id}/>
               </div>
               <div className='w-full max-w-40'>
-                <DeleteButton />
+                <DeleteButton issueId={id}/>
               </div>
             </div>
         </div>

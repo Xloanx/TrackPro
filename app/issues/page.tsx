@@ -87,7 +87,7 @@ const decrementPage= () =>{
   return (
     <>
     {
-      issues.message === "Server error" ? <Text as="p"> <Strong>This request returned a server error. Please contact the administrator.</Strong> </Text>:
+      issues.message === "Server Error" ? <Text as="p"> <Strong>This request returned a server error. Please contact the administrator.</Strong> </Text>:
       issues.length === 0 ? <Text as="p"> <Strong>No data available on the database.</Strong> </Text>:
       <>
     

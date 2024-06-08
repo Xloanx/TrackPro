@@ -19,7 +19,8 @@ type IssueForm = z.infer<typeof createIssueSchema>;
 const NewIssuePage = () => {
 
 //for programmatic navigation
-const router = useRouter()  
+const router = useRouter();
+ 
 const { register, control, handleSubmit, formState:{errors} } = useForm<NewIssueForm>({
   resolver: zodResolver(createIssueSchema)
 });

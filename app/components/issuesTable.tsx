@@ -17,17 +17,8 @@ interface Data {
 const IssuesTable = ({data, handleDelete, selectedRecordSize, handleRecordSizeChange, 
                       selectedPage, handlePageChange, incrementPage, decrementPage }) => {
   
-  console.log(data.message)
-
-  if (data.length>0){
-    const reversedDataArray = data.slice().reverse();  //to be mapped to achieve LIFO
-    const paginatedData = Paginate(reversedDataArray, selectedPage, selectedRecordSize)
-    return [reversedDataArray, paginatedData]
-  }
-  
-
-  
-
+  const reversedDataArray = data.slice().reverse();  //to be mapped to achieve LIFO
+  const paginatedData = Paginate(reversedDataArray, selectedPage, selectedRecordSize);
 
   return (
     <>
