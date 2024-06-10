@@ -3,10 +3,11 @@ import React, {useState, useEffect} from 'react';
 import prisma from '../../../prisma/client'
 import axios from 'axios';
 import { Text, Flex, Box, Badge, Select } from '@radix-ui/themes';
-import EditButton from '@/app/components/editButton';
-import DeleteButton from '@/app/components/deleteButton';
+import EditButton from '@/app/issues/[id]/editButton';
+import DeleteButton from '@/app/issues/[id]/deleteButton';
 import NextPageButton from '@/app/components/nextPageButton';
 import Link from 'next/link';
+import Assignee from './assignee';
 //import { useRouter } from 'next/navigation';
 
 
@@ -73,16 +74,7 @@ const IssueDetails = async ({params}) => {
             
             <div className="text-right items-start flex flex-col space-y-4">
               <div className='w-full max-w-40'>
-                <Select.Root defaultValue="unassigned" radius="small">
-                  <Select.Trigger />
-                  <Select.Content>
-                    <Select.Group>
-                      <Select.Label>Assignment</Select.Label>
-                      <Select.Item value="unassigned">Unassigned</Select.Item>
-                      <Select.Item value="assigned">Assigned</Select.Item>
-                    </Select.Group>
-                  </Select.Content>
-                </Select.Root>
+                <Assignee />
               </div>
               <div className='w-full max-w-40'>
                   <EditButton issueId={id}/>

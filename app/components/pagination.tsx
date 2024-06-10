@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Pagination = ({data, selectedRecordSize, selectedPage, handlePageChange, incrementPage, decrementPage}) => {
+const Pagination = ({data, recordSize, selectedPage, handlePageChange, incrementPage, decrementPage}) => {
 
 //handling pagination logic
 const dataCount = data.length;
-const numOfPages = Math.ceil(dataCount/parseInt(selectedRecordSize))
+const numOfPages = Math.ceil(dataCount/parseInt(recordSize))
 const pages = _.range(1,numOfPages+1)
 
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { Table, Badge, Text, Strong, Flex, Select } from '@radix-ui/themes'
 import Link from 'next/link';
 import _ from 'lodash';
-import Pagination from './pagination';
 import RecordSizeSelect from './recordSizeSelect';
 import { Paginate } from '../utils/paginate';
 
@@ -14,11 +13,11 @@ interface Data {
   updatedAt: Date,
 }
 
-const IssuesTable = ({data, handleDelete, selectedRecordSize, handleRecordSizeChange, 
+const IssuesTable = ({data, handleDelete, recordSize, handleRecordSizeChange, 
                       selectedPage, handlePageChange, incrementPage, decrementPage }) => {
   
   const reversedDataArray = data.slice().reverse();  //to be mapped to achieve LIFO
-  const paginatedData = Paginate(reversedDataArray, selectedPage, selectedRecordSize);
+  const paginatedData = Paginate(reversedDataArray, selectedPage, recordSize);
 
   return (
     <>
@@ -27,9 +26,8 @@ const IssuesTable = ({data, handleDelete, selectedRecordSize, handleRecordSizeCh
         <Text as="p">Showing <Strong>{data.length}</Strong> items on the database.</Text>
       </div>
       <div className="text-right">
-        <RecordSizeSelect 
-              selectedRecordSize={selectedRecordSize}
-              handleRecordSizeChange ={handleRecordSizeChange}/>  
+        <RecordSizeSelect recordSize={recordSize} 
+                          handleRecordSizeChange={handleRecordSizeChange}/>  
       </div>
     </div>
     

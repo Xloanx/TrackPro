@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react';
 import { Flex, Button, Text, Strong } from '@radix-ui/themes';
 import axios from 'axios';
 import IssuesTable from '../components/issuesTable';
-import IssuesListDropDown from '../components/issuesListDropDown';
+import IssuesStatusSelect from '../components/issuesStatusSelect';
 import NewIssueButton from '../components/newIssueButton';
 import Pagination from '../components/pagination';
 import LoadingRings from '../components/loadingRings';
@@ -25,7 +25,7 @@ const IssuesPage = () => {
   const [issues, setIssues] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [selectedStatus, setSelectedStatus] = useState("")
-  const [selectedRecordSize, setSelectedRecordSize] = useState(10);
+  const [recordSize, setRecordSize] = useState(10);
   const [selectedPage, setSelectedPage] = useState(1);
 
   // const response = await fetch('/api/issues');
@@ -67,7 +67,7 @@ const IssuesPage = () => {
  }
 
  const handleRecordSizeChange = (val) => {
-  setSelectedRecordSize(parseInt(val));
+  setRecordSize(parseInt(val));
 };
 
 const handlePageChange = (page) =>{
@@ -97,7 +97,7 @@ const decrementPage= () =>{
       
     <div className="flex justify-between items-center p-4">
       <div className="text-left">
-        <IssuesListDropDown 
+        <IssuesStatusSelect 
             selectedStatus= {selectedStatus}
             handleStatusSelection = {handleStatusSelection}/>
       </div>
@@ -112,8 +112,8 @@ const decrementPage= () =>{
       < IssuesTable 
         data={issues}
         handleDelete = {handleIssueDelete}
-        selectedRecordSize={selectedRecordSize} 
-        handleRecordSizeChange={handleRecordSizeChange}
+        recordSize = {recordSize}
+        handleRecordSizeChange = {handleRecordSizeChange}
         selectedPage={selectedPage}
         handlePageChange={handlePageChange}
         incrementPage={incrementPage}
@@ -124,7 +124,7 @@ const decrementPage= () =>{
 <Flex justify="end">
   <Pagination 
     data={issues}
-    selectedRecordSize = {selectedRecordSize}
+    recordSize = {recordSize}
     selectedPage={selectedPage}
     handlePageChange={handlePageChange}
     incrementPage={incrementPage}

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Select, Button, Badge } from '@radix-ui/themes'
 
-const IssuesListDropDown = ({selectedStatus, handleStatusSelection}) => {
+const IssuesStatusSelect = ({selectedStatus, handleStatusSelection}) => {
 
     const [selected, setSelected] = useState("status")
 
@@ -21,4 +21,4 @@ const IssuesListDropDown = ({selectedStatus, handleStatusSelection}) => {
   )
 }
 
-export default IssuesListDropDown
+export default IssuesStatusSelect
