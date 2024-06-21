@@ -11,9 +11,9 @@ const Priority = ({priority, handlePriorityChange}) => {
                 <Select.Content>
                     <Select.Group>
                         <Select.Item value="priority">Priority</Select.Item>
-                        <Select.Item value="low">LOW</Select.Item>
-                        <Select.Item value="medium">MEDIUM</Select.Item>
-                        <Select.Item value="high">HIGH</Select.Item>
+                        <Select.Item value="LOW">LOW</Select.Item>
+                        <Select.Item value="MEDIUM">MEDIUM</Select.Item>
+                        <Select.Item value="HIGH">HIGH</Select.Item>
                     </Select.Group>
                 </Select.Content>
             </Select.Root>

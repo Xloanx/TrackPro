@@ -11,10 +11,10 @@ const IssueStatus = ({issueStatus, handleIssueStatusChange}) => {
                 <Select.Content>
                     <Select.Group>
                         <Select.Item value="issue status">Status</Select.Item>
-                        <Select.Item value="open">OPEN</Select.Item>
-                        <Select.Item value="in_progress">IN_PROGRESS</Select.Item>
-                        <Select.Item value="resolved">RESOLVED</Select.Item>
-                        <Select.Item value="closed">CLOSED</Select.Item>
+                        <Select.Item value="OPEN">OPEN</Select.Item>
+                        <Select.Item value="IN_PROGRESS">IN_PROGRESS</Select.Item>
+                        <Select.Item value="RESOLVED">RESOLVED</Select.Item>
+                        <Select.Item value="CLOSED">CLOSED</Select.Item>
                     </Select.Group>
                 </Select.Content>
             </Select.Root>

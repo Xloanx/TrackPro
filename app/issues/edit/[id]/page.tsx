@@ -2,6 +2,8 @@
 
 import React, {useState, useEffect} from 'react';
 import { Flex, TextField } from '@radix-ui/themes';
+import SimpleMdeReact from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 import MdeEditor from './mdeEditor';
 import Assignee from './assignee';
 import IssueStatus from './issueStatus';
@@ -17,6 +19,7 @@ const IssueEdit = ({params}) =>{
     const [issueStatus, setIssueStatus] = useState("issue status");
     const [priority, setPriority] = useState("priority");
     const [issue, setIssue] = useState({});
+    const [mdeValue, setMdeValue] = useState("");
 
 
     const handleAssigneeChange = (e) =>{
@@ -31,14 +34,22 @@ const IssueEdit = ({params}) =>{
         setPriority(e);
     }
 
+    // const onMdeValueChange = useCallback((value: string) => {
+    //     setMdeValue(value);
+    //   }, []);
+    const onMdeValueChange = (value: string) => {
+        setMdeValue(value);
+      };
+
+
     useEffect(()=>{
         async function fetchIssue(){
             try {
                 const response = await fetch(`/api/issues/${id}`);
                 const data = await response.json();
-                // setAssignee(issue.assignee);
-                // setIssueStatus(issue.issueStatus);
-                // setPriority(issue.priority);
+                // setAssignee(data.assignee);
+                setIssueStatus(data.status);
+                // setPriority(data.priority);
                 console.log(data);
                 setIssue(data);
                 if (!issue) throw new Error('Failed to fetch issues');
@@ -59,15 +70,16 @@ const IssueEdit = ({params}) =>{
                             Issue Edit - Issue {id} 
                         </h2>
                         
-                        <div className="max-w-xl space-y-3">
-                            <form>
+                        <div className="max-w-xl">
+                            <form className="space-y-3">
                                 <TextField.Root 
                                     placeholder="Title" 
                                     value={issue.title}/>
 
-                                <MdeEditor value={issue.description}/>
+                                {/* <MdeEditor value={issue.description}/> */}
+                                <SimpleMdeReact value={issue.description} onChange={onMdeValueChange} />
 
-                                <div style={{ display: 'none' }}>
+                                {/* <div style={{ display: 'none' }}> */}
                                     <TextField.Root 
                                         placeholder={assignee || 'Assignee'} 
                                         value={assignee} />
@@ -79,7 +91,7 @@ const IssueEdit = ({params}) =>{
                                     <TextField.Root 
                                         placeholder={priority || 'Priority'} 
                                         value={priority} />
-                                </div>
+                                {/* </div> */}
                                 <EditButton />
                             </form>
                         </div>
