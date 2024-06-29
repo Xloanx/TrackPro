@@ -2,12 +2,13 @@
 import React from 'react';
 import { Select } from '@radix-ui/themes';
 
-const Assignee = ({assignee, handleAssigneeChange}) =>{
+const Assignee = ({assignee, handleAssigneeChange, hookReg}) =>{
   return (
     <Select.Root 
         defaultValue={assignee} 
         value={assignee} 
-        onValueChange={handleAssigneeChange}>
+        onValueChange={handleAssigneeChange}
+        hookReg={hookReg}>
         <Select.Trigger placeholder="Assignee" />
         <Select.Content>
             <Select.Group>

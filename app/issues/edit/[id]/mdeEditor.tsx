@@ -6,10 +6,13 @@ import "easymde/dist/easymde.min.css";
 
 
 
-const MdeEditor = () => {
+const MdeEditor = ({placeholder, onChange, value, field}) => {
   return (
     <>
-    <SimpleMDE />
+    <SimpleMDE placeholder={placeholder}
+              onChange={onChange}
+              value={value}
+              field={field}/>
     </>
   )
 }

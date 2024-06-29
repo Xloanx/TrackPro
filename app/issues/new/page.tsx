@@ -38,8 +38,8 @@ const onSubmit = handleSubmit(async (data) => {
       toast.error("Something went wrong",{autoClose:12000})  //toast message
     } 
     catch (error) {
-      setSubmitting(false)
-      setError("An unexpected Error Occured")
+      setSubmitting(false);
+      setError("An unexpected Error Occured");
     }
     })
 
