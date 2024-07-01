@@ -11,13 +11,26 @@ import {
 } from 'recharts';
 
 
-const IssuesChart = ({statusesCounts}) => {
+const IssuesChart = ({issues}) => {
 
+  const statuses = ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"];
+
+  const doStatusCount = (IssuesArray, statusArray) => {
+      const statusCount = IssuesArray.reduce((acc, issue) => {
+          acc[issue.status] = (acc[issue.status] || 0) + 1;
+          return acc;
+      }, {});
+    
+      return statusArray.reduce((acc, status) => {
+                  acc[status] = statusCount[status] || 0;
+                  return acc;
+              }, {});
+  };
   // const data = [
-  //   { label: 'Open', value: statusesCounts.OPEN },
-  //   { label: 'In Progress', value: statusesCounts.IN_PROGRESS },
-  //   { label: 'Closed', value: statusesCounts.CLOSED },
-  //   { label: 'Resolved', value: statusesCounts.RESOLVED },
+  //   { label: 'Open', value: doStatusCount(issues, statuses).OPEN },
+  //   { label: 'In Progress', value: doStatusCount(issues, statuses).IN_PROGRESS },
+  //   { label: 'Closed', value: doStatusCount(issues, statuses).CLOSED },
+  //   { label: 'Resolved', value: doStatusCount(issues, statuses).RESOLVED },
   // ];
 
   const data = [

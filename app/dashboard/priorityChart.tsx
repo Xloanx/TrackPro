@@ -8,7 +8,25 @@ import {
     Cell
   } from 'recharts';
 
-const PriorityChart = ({prioritiesCounts}) => {
+const PriorityChart = ({issues}) => {
+
+  const priorities = ["LOW", "MEDIUM", "HIGH"];
+
+  const doPriorityCount = (IssuesArray, priorityArray) => {
+
+    const priorityCount = IssuesArray.reduce((acc, issue) => {
+      acc[issue.priority] = (acc[issue.priority] || 0) + 1;
+      return acc;
+  }, {});
+  
+  return priorityArray.reduce((acc, priority) => {
+      acc[priority] = priorityCount[priority] || 0;
+      return acc;
+  }, {});
+  };
+
+  const prioritiesCounts = doPriorityCount(issues, priorities);
+
   console.log(prioritiesCounts)
     // const data = [
     //     { label: 'Low', value: prioritiesCounts.LOW },
@@ -33,18 +51,15 @@ const PriorityChart = ({prioritiesCounts}) => {
               data={data}
               // cx="50%"
               // cy="50%"
+              // outerRadius={80}
               labelLine={false}
               label
-              // outerRadius={80}
-
-              cx={120}
-              cy={200}
+              cx={180}
+              cy={140}
               innerRadius={60}
               outerRadius={80}
               fill="#8884d8"
               paddingAngle={5}
-
-              // fill="#8884d8"
               dataKey="value"
               legendType='rect'
               isAnimationActive={false}

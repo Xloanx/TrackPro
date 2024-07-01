@@ -7,15 +7,13 @@ import IssuesChart from './issuesChart';
 import LatestIssuesBox from './latestIssuesBox';
 import PriorityChart from './priorityChart';
 import Stats from './stats';
+import DailyCreationChart from './dailyIssueActionsChart';
 
 const Dashboard = () => {
     const [issues, setIssues] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const statuses = ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"];
-    const priorities = ["LOW", "MEDIUM", "HIGH"];
-
-
+    
     useEffect(()=>{
         async function fetchIssues(){
           try {
@@ -35,59 +33,32 @@ const Dashboard = () => {
       }, [])
 
 
-const doStatusCount = (IssuesArray, statusArray) => {
 
-    const statusCount = IssuesArray.reduce((acc, issue) => {
-      acc[issue.status] = (acc[issue.status] || 0) + 1;
-      return acc;
-  }, {});
-  
-  return statusArray.reduce((acc, status) => {
-      acc[status] = statusCount[status] || 0;
-      return acc;
-  }, {});
-};
-
-const doPriorityCount = (IssuesArray, priorityArray) => {
-
-  const priorityCount = IssuesArray.reduce((acc, issue) => {
-    acc[issue.priority] = (acc[issue.priority] || 0) + 1;
-    return acc;
-}, {});
-
-return priorityArray.reduce((acc, priority) => {
-    acc[priority] = priorityCount[priority] || 0;
-    return acc;
-}, {});
-};
-
-const getLatestIssues = (array, count) => {
-    return array
-        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-        .slice(0, count);
-};
-
-
-console.log(doStatusCount(issues, statuses));
 
 
   return (
-        <div className="flex justify-between items-center ">
-          <div className="item-left self-start  max-w-full">
-              <Stats counts={doStatusCount(issues, statuses)}/>
+        // <div className="flex justify-between items-center ">
+        <Flex gap="8">
+          <div className="item-left self-start  w-2/3">
+              <Stats issues={issues}/>
             
-              <Flex gap="8">
-                <IssuesChart statusesCounts={doStatusCount(issues, statuses)}/>
-                <PriorityChart prioritiesCounts={ doPriorityCount(issues, priorities) }/>
+              <Flex gap="4" className="mb-8">
+                <IssuesChart issues={issues}/>
+                <PriorityChart issues={issues}/>
               </Flex>
+              
+              <DailyCreationChart issues={issues}/>
+                
+              
 
               
           </div>
 
-            <div className="item-right self-start">
-              <LatestIssuesBox latestIssues={getLatestIssues(issues, 15)}/>
+            <div className="item-right self-start w-1/3">
+              <LatestIssuesBox issues={issues}/>
             </div>
-        </div>
+            </Flex>
+        // </div>
         
 
 
