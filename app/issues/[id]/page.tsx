@@ -22,8 +22,6 @@ interface Issue {
 const IssueDetails = async ({params}) => {
   const {id} = params;
 
-
-
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(id, 10) },
   });

@@ -62,50 +62,6 @@ model User {
   assignedIssues Issue[]      @relation(name: "Assignee")
 }
 
-// model Issue {
-//   id           Int      @id @default(autoincrement())
-//   title        String   @db.VarChar(255)
-//   description  String   @db.Text
-//   status       Status   @default(OPEN)
-//   priority     Priority @default(LOW)
-//   reporterId   String   @db.VarChar(255)
-//   reporter     Customer @relation(name: "Reporter", fields: [reporterId], references: [id])
-//   assignedToId String   @db.VarChar(255)
-//   assignedTo   User     @relation(name: "Assignee", fields: [assignedToId], references: [id])
-//   createdAt    DateTime @default(now())
-//   updatedAt    DateTime @updatedAt
-// }
-
-// model Customer {
-//   id             String       @id @default(cuid())
-//   name           String?
-//   email          String       @unique
-//   passwordHash   String
-//   contactInfoId  String?      @db.VarChar(255)
-//   contactInfo    ContactInfo? @relation(fields: [contactInfoId], references: [id])
-//   emailVerified  DateTime?
-//   image          String?
-//   role           Role         @default(CUSTOMER)
-//   accounts       Account[]
-//   sessions       Session[]
-//   reportedIssues Issue[]      @relation(name: "Reporter")
-// }
-
-// model User {
-//   id             String       @id @default(cuid())
-//   name           String?
-//   email          String       @unique
-//   passwordHash   String
-//   contactInfoId  String?      @db.VarChar(255)
-//   contactInfo    ContactInfo? @relation(fields: [contactInfoId], references: [id])
-//   emailVerified  DateTime?
-//   image          String?
-//   role           Role         @default(CUSTOMER)
-//   accounts       Account[]
-//   sessions       Session[]
-//   assignedIssues Issue[]      @relation(name: "Assignee")
-// }
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
