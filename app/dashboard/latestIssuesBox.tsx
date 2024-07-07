@@ -15,7 +15,7 @@ const latestIssues = getLatestIssues(issues, count);
 
 
   return (
-    <div className="border-solid border-2 rounded-lg w-98 font-sans p-4" >
+    <div className="border-solid border-2 rounded-lg font-sans p-4" >
         <div className='font-bold text-2xl mb-8'>Latest Issues</div>
         { latestIssues.length === 0 ?
           <div className='font-bold text-center'> <Loading /> </div>:

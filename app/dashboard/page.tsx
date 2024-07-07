@@ -2,35 +2,37 @@
 
 import React, {useEffect, useState} from 'react';
 import { Flex, Grid, Box } from '@radix-ui/themes';
+import { useIssues } from '@/context/IssuesContext';
 import SummaryBox from './summaryBox';
 import IssuesChart from './issuesChart';
 import LatestIssuesBox from './latestIssuesBox';
 import PriorityChart from './priorityChart';
 import Stats from './stats';
-import DailyCreationChart from './dailyIssueActionsChart';
+import IssueActionsChart from './issueActionsChart';
 
 const Dashboard = () => {
-    const [issues, setIssues] = useState([]);
+    const {issues} = useIssues(); 
+    // const [issues, setIssues] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     
-    useEffect(()=>{
-        async function fetchIssues(){
-          try {
-            const response = await fetch('/api/issues');           
-            setIssues (await response.json());
-            setIsLoading(false);
-            if (!issues) {
-              setIsLoading(false);
-              throw new Error('Failed to fetch issues');
-            }
-          } catch (error) {
-            console.error('Error fetching data:', error);
-            setIsLoading(false);
-          }
-        }
-        fetchIssues()
-      }, [])
+    // useEffect(()=>{
+    //     async function fetchIssues(){
+    //       try {
+    //         const response = await fetch('/api/issues');           
+    //         setIssues (await response.json());
+    //         setIsLoading(false);
+    //         if (!issues) {
+    //           setIsLoading(false);
+    //           throw new Error('Failed to fetch issues');
+    //         }
+    //       } catch (error) {
+    //         console.error('Error fetching data:', error);
+    //         setIsLoading(false);
+    //       }
+    //     }
+    //     fetchIssues()
+    //   }, []);
 
 
 
@@ -47,7 +49,7 @@ const Dashboard = () => {
                 <PriorityChart issues={issues}/>
               </Flex>
               
-              <DailyCreationChart issues={issues}/>
+              <IssueActionsChart issues={issues}/>
                 
               
 

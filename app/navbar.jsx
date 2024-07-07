@@ -1,14 +1,28 @@
-import Link from 'next/link'
-import React from 'react'
+'use client'
+import Link from 'next/link';
+import React, {useState, useContext} from 'react';
+import { useIssues } from '@/context/IssuesContext';
 import { FaBugs } from "react-icons/fa6";
 
 const Navbar = () => {
 
+    
+    const { filteredData, searchValue, setSearchValue } = useIssues();
+    
     const links = [
         { label: 'Dashboard', href: '/dashboard' },
         { label: 'Issues', href: '/issues' },
         { label: 'Projects', href: '/projects' },
-    ]
+    ];
+
+    const handleSearchChange = (event) => {
+    const inputSearchvalue = event.target.value;
+    setSearchValue(inputSearchvalue);
+    
+    //filterIssuesByTerm(inputSearchvalue);
+    };
+
+
   return (
     <nav>
         <div className="navbar bg-base-100">
@@ -30,11 +44,16 @@ const Navbar = () => {
             {links.map(link => (
                     <li key={link.label}><Link href={link.href}>{link.label}</Link></li>
                 ))}
+                
             </ul>
         </div>
         <div className="navbar-end">
             <div className="form-control">
-                <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+                <input type="text" 
+                        placeholder="Search" 
+                        className="input input-bordered w-24 md:w-auto" 
+                        value={searchValue}
+                        onChange={handleSearchChange}/>
             </div>
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">

@@ -1,18 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { useIssues } from '@/context/IssuesContext';
 
-const Pagination = ({data, recordSize, selectedPage, handlePageChange, incrementPage, decrementPage}) => {
+const Pagination = () => {
+
+  const { selectedPage, recordSize, setSelectedPage, paginatedData} = useIssues();
+
 
 //handling pagination logic
-const dataCount = data.length;
+const dataCount = paginatedData.length;
 const numOfPages = Math.ceil(dataCount/parseInt(recordSize))
 const pages = _.range(1,numOfPages+1)
 
+const handlePageChange = (page) =>{
+  setSelectedPage(page)
+}
 
+const incrementPage= () =>{
+  setSelectedPage(selectedPage+1)
+}
+
+const decrementPage= () =>{
+  setSelectedPage(selectedPage-1)
+}
 
 
   return (
     <>
-    { pages.length === 1? "" :  //if selected record size results in just a page, don't display pagination
+    { pages.length === 1?"" :  //if selected record size results in just a page, don't display pagination
     <div className="join py-5">
         <button 
             className={selectedPage===1?

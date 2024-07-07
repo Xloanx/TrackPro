@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/UsersContext.js", "context/SessionsContext.js", "context/IssuesContext.js", "app/issues/recordSizeSelect.jsx", "app/issues/pagination.jsx", "app/issues/page.jsx", "app/issues/newIssueButton.jsx", "app/issues/issuesTable.jsx", "app/issues/issuesStatusSelect.jsx", "app/layout.tsx", "app/page.jsx", "app/navbar.jsx"],
   "exclude": ["node_modules"]
 }

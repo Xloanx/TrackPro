@@ -10,6 +10,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './footer';
 
+import { IssuesProvider } from '@/context/IssuesContext';
+import { UsersProvider } from '@/context/UsersContext';
+import { SessionsProvider } from '@/context/SessionsContext';
+
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,13 +31,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Theme accentColor="blue" radius="small">
-          <Navbar />
-            <main className="p-5">
-                {children}
-            </main>
-          <Footer />
-        </Theme>
+          <SessionsProvider>
+            <UsersProvider>
+              <Theme accentColor="blue" radius="small">
+                <IssuesProvider>
+                  <Navbar />
+                    <main className="p-5">
+                        {children}
+                    </main>
+                  <Footer />
+                </IssuesProvider>
+              </Theme>
+            </UsersProvider>
+          </SessionsProvider>
       </body>
     </html>
   );

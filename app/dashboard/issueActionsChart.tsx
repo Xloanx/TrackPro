@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Card } from '@radix-ui/themes';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
 
-const DailyIssueActionsChart = ({issues}) => {
+const IssueActionsChart = ({issues}) => {
 
   // Helper function to format the date to 'YYYY-MM-DD'
   const formatDate = (dateString) => dateString.split('T')[0];
@@ -34,24 +34,24 @@ const DailyIssueActionsChart = ({issues}) => {
   });
   
   // Convert the statusCounts object to an array of objects
-  //const data = Object.values(statusCounts);
+  const data = Object.values(statusCounts);
   
   // Log the result
   //console.log(data);
 
-  const data = [
-    { "day": "2024-06-03", "open": 22, "resolved": 12, "in_progress": 16, "closed": 8 },
-    { "day": "2024-06-04", "open": 12, "resolved": 3, "in_progress": 15, "closed": 6},
-    { "day": "2024-06-05", "open": 33, "resolved": 8, "in_progress": 22, "closed": 1 },
-    { "day": "2024-06-07", "open": 12, "resolved": 17, "in_progress": 15, "closed": 10 },
-    { "day": "2024-06-10", "open": 1,  "resolved": 12, "in_progress": 0, "closed": 5 }
-]
+//   const data = [
+//     { "day": "2024-06-03", "open": 22, "resolved": 12, "in_progress": 16, "closed": 8 },
+//     { "day": "2024-06-04", "open": 12, "resolved": 3, "in_progress": 15, "closed": 6},
+//     { "day": "2024-06-05", "open": 33, "resolved": 8, "in_progress": 22, "closed": 1 },
+//     { "day": "2024-06-07", "open": 12, "resolved": 17, "in_progress": 15, "closed": 10 },
+//     { "day": "2024-06-10", "open": 1,  "resolved": 12, "in_progress": 0, "closed": 5 }
+// ]
 
   return (
     <Box width="100%" className='max-w-full'>
 
       <Card>
-          <div className='font-bold text-lg mb-2'>Daily Creation of Issues</div>
+          <div className='font-bold text-lg mb-2'>Issues Actions Trends</div>
             
           <ResponsiveContainer height={250} width="100%">
             <LineChart data={data} margin={{ right: 25, top: 10 }}>
@@ -70,5 +70,5 @@ const DailyIssueActionsChart = ({issues}) => {
   )
 }
 
-export default DailyIssueActionsChart
+export default IssueActionsChart
 

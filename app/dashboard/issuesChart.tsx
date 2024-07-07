@@ -26,19 +26,19 @@ const IssuesChart = ({issues}) => {
                   return acc;
               }, {});
   };
-  // const data = [
-  //   { label: 'Open', value: doStatusCount(issues, statuses).OPEN },
-  //   { label: 'In Progress', value: doStatusCount(issues, statuses).IN_PROGRESS },
-  //   { label: 'Closed', value: doStatusCount(issues, statuses).CLOSED },
-  //   { label: 'Resolved', value: doStatusCount(issues, statuses).RESOLVED },
-  // ];
-
   const data = [
-    { label: 'Open', value: 216 },
-    { label: 'In Progress', value: 32 },
-    { label: 'Closed', value: 84 },
-    { label: 'Resolved', value: 311 },
+    { label: 'Open', value: doStatusCount(issues, statuses).OPEN },
+    { label: 'In Progress', value: doStatusCount(issues, statuses).IN_PROGRESS },
+    { label: 'Closed', value: doStatusCount(issues, statuses).CLOSED },
+    { label: 'Resolved', value: doStatusCount(issues, statuses).RESOLVED },
   ];
+
+  // const data = [
+  //   { label: 'Open', value: 216 },
+  //   { label: 'In Progress', value: 32 },
+  //   { label: 'Closed', value: 84 },
+  //   { label: 'Resolved', value: 311 },
+  // ];
   console.log(data)
     return (
       <Box width="400px">

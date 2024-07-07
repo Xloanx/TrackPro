@@ -28,16 +28,16 @@ const PriorityChart = ({issues}) => {
   const prioritiesCounts = doPriorityCount(issues, priorities);
 
   console.log(prioritiesCounts)
-    // const data = [
-    //     { label: 'Low', value: prioritiesCounts.LOW },
-    //     { label: 'Medium', value: prioritiesCounts.MEDIUM },
-    //     { label: 'High', value: prioritiesCounts.HIGH },
-    //   ];
     const data = [
-        { label: 'Low', value: 68},
-        { label: 'Medium', value: 33 },
-        { label: 'High', value: 43 },
+        { label: 'Low', value: prioritiesCounts.LOW },
+        { label: 'Medium', value: prioritiesCounts.MEDIUM },
+        { label: 'High', value: prioritiesCounts.HIGH },
       ];
+    // const data = [
+    //     { label: 'Low', value: 68},
+    //     { label: 'Medium', value: 33 },
+    //     { label: 'High', value: 43 },
+    //   ];
     // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
   return (

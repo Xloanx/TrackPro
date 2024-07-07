@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Text, Flex, Box, Badge, Select } from '@radix-ui/themes';
 import EditButton from '@/app/issues/[id]/editButton';
 import DeleteButton from '@/app/issues/[id]/deleteButton';
-import NextPageButton from '@/app/components/nextPageButton';
+import NextPageButton from '@/app/issues/[id]/nextPageButton';
 import Link from 'next/link';
 import Assignee from './assignee';
 //import { useRouter } from 'next/navigation';
@@ -46,7 +46,7 @@ const IssueDetails = async ({params}) => {
         
 
       {!issue ?
-      <Text weight="bold" size="4" as="div" color="red">"This Issue Id does not exist !!"</Text>:
+      <Text weight="bold" size="4" as="div" color="red">"Invalid ID !!"</Text>:
         <div className="flex justify-between items-center p-4 space-x-96">
             <div className="text-left">
                 <Box className="flex flex-col space-y-4 ...">
@@ -60,7 +60,7 @@ const IssueDetails = async ({params}) => {
                                   }> {issue.status}
                     </Badge>
                     <div> 
-                    {new Date(issue.createdAt).toDateString()}
+                    {new Date(issue.updatedAt).toDateString()}
                     </div>
                   </div>
                   <div className="glass border-solid border-2 border-stone-300 rounded-lg">  
