@@ -26,13 +26,13 @@ const IssuesPage = () => {
 
 
   
-  console.log(filteredData);
+  // console.log(filteredData);
 
-  console.log(reversedDataArray);
+  // console.log(reversedDataArray);
 // const reversedDataArray = filteredData.slice().reverse();  //to be mapped to achieve LIFO
 // const paginatedData = Paginate(reversedDataArray, selectedPage, recordSize);
 
-console.log(paginatedData);
+// console.log(paginatedData);
 
 
 

@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/UsersContext.js", "context/SessionsContext.js", "context/IssuesContext.js", "app/issues/recordSizeSelect.jsx", "app/issues/pagination.jsx", "app/issues/page.jsx", "app/issues/newIssueButton.jsx", "app/issues/issuesTable.jsx", "app/issues/issuesStatusSelect.jsx", "app/layout.tsx", "app/page.jsx", "app/navbar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/UsersContext.js", "context/SessionsContext.js", "context/IssuesContext.js", "app/issues/recordSizeSelect.jsx", "app/issues/pagination.jsx", "app/issues/page.jsx", "app/issues/newIssueButton.jsx", "app/issues/issuesTable.jsx", "app/issues/issuesStatusSelect.jsx", "app/layout.tsx", "app/page.jsx", "app/navbar.jsx", "app/issues/edit/[id]/assignee.jsx", "app/issues/edit/[id]/editButton.jsx", "app/issues/edit/[id]/issueStatus.jsx", "app/issues/edit/[id]/mdeEditor.jsx", "app/issues/edit/[id]/priority.jsx", "app/issues/edit/[id]/page.jsx"],
   "exclude": ["node_modules"]
 }

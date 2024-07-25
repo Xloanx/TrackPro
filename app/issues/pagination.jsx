@@ -3,13 +3,13 @@ import { useIssues } from '@/context/IssuesContext';
 
 const Pagination = () => {
 
-  const { selectedPage, recordSize, setSelectedPage, paginatedData} = useIssues();
+  const { selectedPage, recordSize, setSelectedPage, reversedDataArray} = useIssues();
 
 
 //handling pagination logic
-const dataCount = paginatedData.length;
-const numOfPages = Math.ceil(dataCount/parseInt(recordSize))
-const pages = _.range(1,numOfPages+1)
+const dataCount = reversedDataArray.length;
+const numOfPages = Math.ceil(dataCount/parseInt(recordSize));
+const pages = _.range(1,numOfPages+1);
 
 const handlePageChange = (page) =>{
   setSelectedPage(page)

@@ -48,29 +48,29 @@ const IssueDetails = async ({params}) => {
       {!issue ?
       <Text weight="bold" size="4" as="div" color="red">"Invalid ID !!"</Text>:
         <div className="flex justify-between items-center p-4 space-x-96">
-            <div className="text-left">
+            <div className="items-left w-5/6">
                 <Box className="flex flex-col space-y-4 ...">
-                <Text weight="bold" size="8" as="div">
-                {issue.title}
-                </Text>
-                  <div className="flex space-x-4 ...">
-                    <Badge color={issue.status === "OPEN" ? "orange":
-                                  issue.status === "IN_PROGRESS" ? "blue":
-                                  issue.status === "CLOSED" ? "green":""
-                                  }> {issue.status}
-                    </Badge>
-                    <div> 
-                    {new Date(issue.updatedAt).toDateString()}
+                  <Text weight="bold" size="8" as="div">
+                  {issue.title}
+                  </Text>
+                    <div className="flex space-x-4 ...">
+                      <Badge color={issue.status === "OPEN" ? "orange":
+                                    issue.status === "IN_PROGRESS" ? "blue":
+                                    issue.status === "CLOSED" ? "green":""
+                                    }> {issue.status}
+                      </Badge>
+                      <div> 
+                      {new Date(issue.updatedAt).toDateString()}
+                      </div>
                     </div>
-                  </div>
-                  <div className="glass border-solid border-2 border-stone-300 rounded-lg">  
-                    {issue.description} 
-                  </div>
+                    <div className="glass border-solid border-2 border-stone-300 rounded-lg">  
+                      {issue.description} 
+                    </div>
 
                 </Box>
             </div>
             
-            <div className="text-right items-start flex flex-col space-y-4">
+            <div className="items-right items-start w-1/6 md:w-32 flex flex-col space-y-4">
               <div className='w-full max-w-40'>
                 <Assignee />
               </div>

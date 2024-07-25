@@ -33,6 +33,7 @@ const onSubmit = handleSubmit(async (data) => {
       const res = await axios.post('/api/issues', data)   //post to api
       
       router.push('/issues')                  // redirect to issues page
+      router.refresh();
       res.status === 201 ? 
       toast.success("Issue submitted successfully",{autoClose:12000}) :  
       toast.error("Something went wrong",{autoClose:12000})  //toast message

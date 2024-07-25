@@ -19,7 +19,7 @@ import EditButton from './editButton';
 import ErrorMessage from '@/app/components/errorMessage';
 
 //define the types 
-type IssueForm = z.infer<typeof updateIssueSchema>;
+// type IssueForm = z.infer<typeof updateIssueSchema>;
 
 const IssueEdit = ({params}) =>{
 
@@ -36,7 +36,8 @@ const IssueEdit = ({params}) =>{
     const [error, setError] = useState("")
     const [isSubmitting, setSubmitting] = useState(false)
 
-    const { register, control, handleSubmit, formState:{errors} } = useForm<UpdateIssueForm>({
+    // const { register, control, handleSubmit, formState:{errors} } = useForm<UpdateIssueForm>({
+    const { register, control, handleSubmit, formState:{errors} } = useForm({
         resolver: zodResolver(updateIssueSchema)
       });
 
@@ -57,7 +58,7 @@ const IssueEdit = ({params}) =>{
         setTitle(e)
     }
 
-    const onMdeValueChange = (value: string) => {
+    const onMdeValueChange = (value) => {
         setMdeValue(value);
       };
 
@@ -81,15 +82,17 @@ const IssueEdit = ({params}) =>{
             try {
                 const response = await fetch(`/api/issues/${id}`);
                 const data = await response.json();
+                console.log(data);
                 setAssignee(data.assignee);
                 setIssueStatus(data.status);
                 setPriority(data.priority);
                 setTitle(data.title);
                 console.log(data);
                 setIssue(data);
-                if (!issue) throw new Error('Failed to fetch issues');
+                // if (!issue) throw new Error('Failed to fetch issues');
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setError("An unexpected Error Occured");
             }
         }
         fetchIssue()
