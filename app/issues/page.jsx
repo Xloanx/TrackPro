@@ -25,17 +25,6 @@ const IssuesPage = () => {
   }
 
 
-  
-  // console.log(filteredData);
-
-  // console.log(reversedDataArray);
-// const reversedDataArray = filteredData.slice().reverse();  //to be mapped to achieve LIFO
-// const paginatedData = Paginate(reversedDataArray, selectedPage, recordSize);
-
-// console.log(paginatedData);
-
-
-
 
 
 
@@ -44,7 +33,12 @@ const IssuesPage = () => {
     <>
     {
       issues.message === "Server Error" ? <Text as="p"> <Strong>This request returned a server error. Please contact the administrator.</Strong> </Text>:
-      issues.length === 0 ? <Text as="p"> <Strong>No data available on the database.</Strong> </Text>:
+      issues.length === 0 ? <div> 
+                              <Text as="p"> <Strong>No data available on the database.</Strong> </Text>
+                              <div className="text-right">
+                                  <NewIssueButton />
+                              </div>
+                            </div>:
       <>
     
     <h2 className="font-mono text-2xl font-bold ">

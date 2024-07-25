@@ -1,5 +1,6 @@
 import React from 'react';
 import Loading from './loading';
+import { Badge } from '@radix-ui/themes';
 
 const Stats = ({issues}) => {
   const statuses = ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"];
@@ -27,7 +28,11 @@ const Stats = ({issues}) => {
   return (
     <div className="stats stats-vertical lg:stats-horizontal shadow mb-8">
         <div className="stat">
-            <div className="stat-title">Open</div>
+            <div className="stat-title">
+            <Badge color="red">
+                  <p className='font-semibold'>Open</p>                          
+              </Badge>
+            </div>
             {!openPercentage ? (<div className='font-bold text-center'> <Loading /> </div>): 
            
                       (
@@ -35,7 +40,7 @@ const Stats = ({issues}) => {
                           <div className="stat-value"> {counts.OPEN} </div>
                           <div className="stat-desc"> 
                             {openPercentage > 50 ? <span>↗︎</span> : <span>↘︎</span>}
-                            {parseInt(openPercentage)}% 
+                            {parseInt(openPercentage).toFixed(2)}% 
                           </div>
                         </>
                       )
@@ -43,42 +48,54 @@ const Stats = ({issues}) => {
         </div>
 
         <div className="stat">
-            <div className="stat-title">In Progress</div>
+            <div className="stat-title">
+              <Badge color="yellow">
+                  <p className='font-semibold'>In Progress</p>                          
+              </Badge>
+            </div>
             {!inProgressPercentage ? (<div className='font-bold text-center'> <Loading /> </div>):
                                       (
                                         <>
                                           <div className="stat-value"> {counts.IN_PROGRESS} </div>
                                           <div className="stat-desc"> 
                                             {inProgressPercentage > 50 ? <span>↗︎</span> : <span>↘︎</span>}
-                                            {inProgressPercentage}% </div>
+                                            {inProgressPercentage.toFixed(2)}% </div>
                                         </>
                                       )
             }
         </div>
 
         <div className="stat">
-            <div className="stat-title">Resolved</div>
+            <div className="stat-title">
+              <Badge color="blue">
+                  <p className='font-semibold'>Resolved</p>                          
+              </Badge>
+            </div>
             {!resolvedPercentage ? (<div className='font-bold text-center'> <Loading /> </div>):
                                     (
                                       <>
                                         <div className="stat-value"> {counts.RESOLVED} </div>
                                         <div className="stat-desc"> 
                                           {resolvedPercentage > 50 ? <span>↗︎</span> : <span>↘︎</span>}
-                                          {resolvedPercentage}%</div>
+                                          {resolvedPercentage.toFixed(2)}%</div>
                                       </>
                                     )
           }
         </div>
 
         <div className="stat">
-            <div className="stat-title">Closed</div>
+            <div className="stat-title">
+              <Badge color="green">
+                  <p className='font-semibold'>Closed</p>                          
+              </Badge>
+            </div>
             {!closedPercentage ? (<div className='font-bold text-center'> <Loading /> </div>):
                                   (
                                     <>
                                       <div className="stat-value"> {counts.CLOSED} </div>
                                       <div className="stat-desc"> 
                                         {closedPercentage > 50 ? <span>↗︎</span> : <span>↘︎</span>}
-                                        {closedPercentage}%
+                                        {closedPercentage.toFixed(2)}%
                                       </div>
                                   </>
                                 )

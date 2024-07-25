@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import prisma from '../../../prisma/client'
 import axios from 'axios';
 import { Text, Flex, Box, Badge, Select } from '@radix-ui/themes';
@@ -11,13 +11,6 @@ import Assignee from './assignee';
 //import { useRouter } from 'next/navigation';
 
 
-interface Issue {
-  title: string;
-  description: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 const IssueDetails = async ({params}) => {
   const {id} = params;
